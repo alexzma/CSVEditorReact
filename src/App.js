@@ -66,7 +66,7 @@ export default function App() {
   const [list, setList] = useState(Array());
 
     return (
-        <div className="app">
+        <div className="app" data-testid="app">
             <FileInput setList={setList} />
             <DownloadButton list={list} />
             <Table list={list} setList={setList} />
