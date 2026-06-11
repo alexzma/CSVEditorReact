@@ -1,4 +1,4 @@
 # ListReact
 This web app parses a csv file and creates a table
-
-Editing the table is planned
+The csv can be edited in the table
+The resulting table can be downloaded as a csv

@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import Table from './Table';
 
-function FileInput(setList) {
+function FileInput({setList}) {
     function processFile(file) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -20,7 +21,7 @@ function FileInput(setList) {
     );
 }
 
-function DownloadButton(list) {
+function DownloadButton({list}) {
     function downloadCSV() {
         const rows = list.map(row => row.join(',')).join('\n');
         const blob = new Blob([rows], { type: 'text/csv' });
@@ -39,29 +40,6 @@ function DownloadButton(list) {
     )
 }
 
-function Table(list, setList) {
-    return (
-        <table>
-            <thead>
-                <tr>
-                    {list.length > 0 && list[0].map((value, index) => (
-                        <th key={index}>{value}</th>
-                    ))}
-                </tr>
-            </thead>
-            <tbody>
-                {list.length > 1 && list.slice(1).map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                        {row.map((value, cellIndex) => (
-                            <td key={cellIndex}>{value}</td>
-                        ))}
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    )
-}
-
 export default function App() {
   const [list, setList] = useState(Array());
 
@@ -69,6 +47,7 @@ export default function App() {
         <div className="app" data-testid="app">
             <FileInput setList={setList} />
             <DownloadButton list={list} />
+            <h1>CSV Editor</h1>
             <Table list={list} setList={setList} />
         </div>
     )

@@ -4,3 +4,18 @@
         display: block;
     }
 }
+
+.table {
+    th, td {
+        border: 1px solid black;
+        padding: 0.5rem;
+    }
+
+    .tableHeader {
+        background-color: #f0f0f0;
+    }
+}
+
+.addRowButton {
+    width: 100%;
+}
