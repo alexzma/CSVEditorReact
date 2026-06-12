@@ -96,7 +96,7 @@ export default function Table({list, setList}) {
                         {row.map((value, cellIndex) => (
                             <td key={cellIndex}><CellInput value={value} rowIndex={rowIndex+1} cellIndex={cellIndex} onChange={handleCellChange} /></td>
                         ))}
-                        <td><DeleteRowButton rowIndex={rowIndex} list={list} setList={setList} /></td>
+                        <td><DeleteRowButton rowIndex={rowIndex+1} list={list} setList={setList} /></td>
                     </tr>
                 ))}
                 {list.length > 0 && (
