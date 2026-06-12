@@ -5,6 +5,8 @@ The csv can be edited in the table
 
 The resulting table can be downloaded as a csv
 
+Now electron has been added so that the app can be compiled for use outside the browser.
+
 ## Demo
 
 https://github.com/user-attachments/assets/1ed42ed4-75c0-4cc8-8560-c550515c5a20
