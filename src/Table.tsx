@@ -1,14 +1,16 @@
-function CellInput({value, rowIndex, cellIndex, onChange}) {
-    function handleChange(e) {
+function CellInput({value, rowIndex, cellIndex, onChange}: {value: string, rowIndex: number, cellIndex: number, onChange: (rowIndex: number, cellIndex: number, value: string) => void}) {
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
         onChange(rowIndex, cellIndex, e.target.value);
     }
 
+    const testId = `cellInput-${rowIndex}-${cellIndex}`;
+
     return (
-        <input value={value} onChange={handleChange} />
+        <input data-testid={testId} value={value} onChange={handleChange} />
     )
 }
 
-function AddColumnButton({list, setList}) {
+function AddColumnButton({list, setList}: {list: string[][], setList: (list: string[][]) => void}) {
     function addColumn() {
         if (list.length === 0) {
             setList([['']]);
@@ -21,11 +23,11 @@ function AddColumnButton({list, setList}) {
     }
 
     return (
-        <button onClick={addColumn} aria-label="Add Column">Add Column +</button>
+        <button data-testid="addColumnButton" onClick={addColumn} aria-label="Add Column">Add Column +</button>
     )
 }
 
-function DeleteColumnButton({list, setList, column}) {
+function DeleteColumnButton({list, setList, column}: {list: string[][], setList: (list: string[][]) => void, column: number}) {
     function deleteColumn() {
         if (list.length === 0) {
             return;
@@ -35,11 +37,11 @@ function DeleteColumnButton({list, setList, column}) {
     }
 
     return (
-        <button onClick={deleteColumn} aria-label="Delete Column">Delete Column -</button>
+        <button data-testid={"deleteColumnButton-" + column} onClick={deleteColumn} aria-label="Delete Column">Delete Column -</button>
     )
 }
 
-function AddRowButton({list, setList}) {
+function AddRowButton({list, setList}: {list: string[][], setList: (list: string[][]) => void}) {
     function addRow() {
         if (list.length === 0) {
             setList([[]]);
@@ -50,30 +52,30 @@ function AddRowButton({list, setList}) {
     }
 
     return (
-        <button class="addRowButton" onClick={addRow} aria-label="Add Row">Add Row +</button>
+        <button data-testid="addRowButton" className="addRowButton" onClick={addRow} aria-label="Add Row">Add Row +</button>
     )
 }
 
-function DeleteRowButton({rowIndex, list, setList}) {
+function DeleteRowButton({rowIndex, list, setList}: {rowIndex: number, list: string[][], setList: (list: string[][]) => void}) {
     function deleteRow() {
         const newList = list.filter((_, index) => index !== rowIndex);
         setList(newList);
     }
 
     return (
-        <button class="deleteRowButton" onClick={deleteRow} aria-label="Delete Row">Delete Row -</button>
+        <button data-testid={"deleteRowButton-" + rowIndex} className="deleteRowButton" onClick={deleteRow} aria-label="Delete Row">Delete Row -</button>
     )
 }
 
-export default function Table({list, setList}) {
-    function handleCellChange(rowIndex, cellIndex, value) {
+export default function Table({list, setList}: {list: string[][], setList: (list: string[][]) => void}) {
+    function handleCellChange(rowIndex: number, cellIndex: number, value: string) {
         const newList = [...list];
         newList[rowIndex][cellIndex] = value;
         setList(newList);
     }
 
     return (
-        <table class="table" data-testid="table">
+        <table className="table" data-testid="table">
             <thead>
                 {list.length > 0 && (
                     <tr>
@@ -85,7 +87,7 @@ export default function Table({list, setList}) {
                 )}
                 <tr>
                     {list.length > 0 && list[0].map((value, index) => (
-                        <th class="tableHeader" key={index}><CellInput value={value} rowIndex={0} cellIndex={index} onChange={handleCellChange} /></th>
+                        <th className="tableHeader" key={index}><CellInput value={value} rowIndex={0} cellIndex={index} onChange={handleCellChange} /></th>
                     ))}
                     <th><AddColumnButton list={list} setList={setList} /></th>
                 </tr>
