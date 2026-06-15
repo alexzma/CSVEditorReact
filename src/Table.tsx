@@ -78,25 +78,25 @@ export default function Table({list, setList}: {list: string[][], setList: (list
         <table className="table" data-testid="table">
             <thead>
                 {list.length > 0 && (
-                    <tr>
+                    <tr key="deleteColumnRow">
                         {list[0].map((_, index) => (
-                            <th><DeleteColumnButton list={list} setList={setList} column={index} /></th>
+                            <th key={'deleteColumn-' + index}><DeleteColumnButton list={list} setList={setList} column={index} /></th>
                         ))}
                         <th></th>
                     </tr>
                 )}
-                <tr>
+                <tr key="header">
                     {list.length > 0 && list[0].map((value, index) => (
-                        <th className="tableHeader" key={index}><CellInput value={value} rowIndex={0} cellIndex={index} onChange={handleCellChange} /></th>
+                        <th className="tableHeader" key={'column-' + index}><CellInput value={value} rowIndex={0} cellIndex={index} onChange={handleCellChange} /></th>
                     ))}
                     <th><AddColumnButton list={list} setList={setList} /></th>
                 </tr>
             </thead>
             <tbody>
                 {list.length > 1 && list.slice(1).map((row, rowIndex) => (
-                    <tr key={rowIndex}>
+                    <tr key={'row-' + rowIndex}>
                         {row.map((value, cellIndex) => (
-                            <td key={cellIndex}><CellInput value={value} rowIndex={rowIndex+1} cellIndex={cellIndex} onChange={handleCellChange} /></td>
+                            <td key={rowIndex + '-' + cellIndex}><CellInput value={value} rowIndex={rowIndex+1} cellIndex={cellIndex} onChange={handleCellChange} /></td>
                         ))}
                         <td><DeleteRowButton rowIndex={rowIndex+1} list={list} setList={setList} /></td>
                     </tr>

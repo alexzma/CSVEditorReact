@@ -21,9 +21,9 @@ function FileInput({setList}: {setList: (list: string[][]) => void}) {
     }
 
     return (
-        <div className="fileInput" data-testid="fileInput">
+        <div className="fileInput">
             <label htmlFor="fileInput">Choose a CSV file</label>
-            <input id="fileInput" type="file" onChange={processFile} />
+            <input data-testid="fileInput" id="fileInput" type="file" onChange={processFile} />
         </div>
     );
 }
